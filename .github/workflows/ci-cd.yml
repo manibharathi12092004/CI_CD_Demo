@@ -1,12 +1,11 @@
-name : CI pipeline
-
+name : CI/CD pipeline
 on:
   push:
     branches: 
       - Main
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,6 +22,14 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+  cd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploying it to render using hook
+        needs: ci
+        runs-on: ubuntu-latest
 
       - name: Trigger Render Deploy
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
