@@ -23,3 +23,10 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Deploy to Render
+        uses: actions/deploy-to-render@v1
+        with:
+          app-name: ci-cd-demo
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          branch: Main
