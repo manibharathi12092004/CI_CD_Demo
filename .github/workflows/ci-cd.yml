@@ -24,13 +24,11 @@ jobs:
         run: npm test
 
   cd:
-  
-    - name: Deploy to Render
-      needs: ci
+    needs: ci
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
+    steps:
 
-        - name: Trigger Render Deploy
-          run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Trigger Render Deploy
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
